@@ -34,6 +34,7 @@ public class Player_Movement : MonoBehaviour {
 
 
         }
+        //space jet moved
         if (transform.position.x > 8)
         {
             transform.position = new Vector3(8, transform.position.y, 0);
