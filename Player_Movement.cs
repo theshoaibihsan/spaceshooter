@@ -8,11 +8,11 @@ public class Player_Movement : MonoBehaviour {
     public GameObject tiple_shot;
     public GameObject Powerfull_laser;
     public GameObject Laser;
-   public float speed = 5f;
+    public float speed = 5f;
     public float firerate =20f;
     public float canfire = 0.0f;
     public float boostupSpeed = 15f;
-    public float lives =5.0f;
+    public int lives = 3;
     public GameObject Player_Explosion;
 
     public GameObject shield_gameobject;
@@ -20,15 +20,23 @@ public class Player_Movement : MonoBehaviour {
     public bool shield = false;
     public bool Triple_shot=false;
     public bool isSpeedBoostActive = false;
-//bools ends
-
+    //bools ends
+    public UIManager uIManager;
 
     public float horizontal;
     public float vertical;
+
     
-    // Use this for initialization
-    void Start () {
-    
+    public void Start () {
+        uIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        if(uIManager != null)
+        {
+            uIManager.UpdateLive(lives);
+        }
+       
+
+
+
 	}
 
     // Update is called once per frame
@@ -178,7 +186,8 @@ public class Player_Movement : MonoBehaviour {
             return;
         }
 
-        lives -= 5f;
+        lives--;
+        uIManager.UpdateLive(lives);
         if (lives < 1)
         {
             Instantiate(Player_Explosion, transform.position, Quaternion.identity);
